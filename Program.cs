@@ -17,19 +17,11 @@ namespace pathFinding
             public bool connected = false;
         }
 
-        public static Tile[,] setMap(Tile[,] map, int maxY, int maxX)
+        public static Tile[,] setMap(Tile[,] map, int[,] nrMap)
         {
-            maxY = map.GetLength(0);
-            maxX = map.GetLength(1);
-            int[,] nrMap = new int[6, 7]{
-                {0,0,1,1,1,1,0},
-                {0,0,1,0,0,1,0},
-                {0,3,1,0,1,1,0},
-                {0,1,0,0,1,0,0},
-                {1,1,1,1,1,0,0},
-                {2,0,0,0,0,0,0}
+            int maxY = nrMap.GetLength(0);
+            int maxX = nrMap.GetLength(1);
 
-            };
             for (int i = 0; i < maxY; i++)
             {
                 for (int j = 0; j < maxX; j++)
@@ -58,7 +50,7 @@ namespace pathFinding
         {
             try
             {
-                if (map[now.y, now.x - 1].value != 0 && map[now.y, now.x - 1].explored == false)
+                if (map[now.y, now.x - 1].value != 0 && map[now.y, now.x - 1].explored == false && map[now.y, now.x - 1].symbol != "■")
                 {
                     neighbor.Enqueue(map[now.y, now.x - 1]);
                     // Console.WriteLine("add " + map[now.y,now.x-1].x + " " + map[now.y,now.x-1].y);
@@ -71,7 +63,7 @@ namespace pathFinding
 
                 try
                 {
-                    if (map[now.y, now.x + 1].value != 0 && map[now.y, now.x + 1].explored == false)
+                    if (map[now.y, now.x + 1].value != 0 && map[now.y, now.x + 1].explored == false && map[now.y, now.x + 1].symbol != "■")
                     {
                         neighbor.Enqueue(map[now.y, now.x + 1]);
                         // Console.WriteLine("add " + map[now.y,now.x+1].x + " " + map[now.y,now.x+1].y);
@@ -83,7 +75,7 @@ namespace pathFinding
                 {
                     try
                     {
-                        if (map[now.y - 1, now.x].value != 0 && map[now.y - 1, now.x].explored == false)
+                        if (map[now.y - 1, now.x].value != 0 && map[now.y - 1, now.x].explored == false && map[now.y - 1, now.x].symbol != "■")
                         {
                             neighbor.Enqueue(map[now.y - 1, now.x]);
                             // Console.WriteLine("add " + map[now.y-1,now.x].x + " " + map[now.y-1,now.x].y);
@@ -95,7 +87,7 @@ namespace pathFinding
                     {
                         try
                         {
-                            if (map[now.y + 1, now.x].value != 0 && map[now.y + 1, now.x].explored == false)
+                            if (map[now.y + 1, now.x].value != 0 && map[now.y + 1, now.x].explored == false && map[now.y + 1, now.x].symbol != "■")
                             {
                                 neighbor.Enqueue(map[now.y + 1, now.x]);
                                 // Console.WriteLine("add " + map[now.y+1,now.x].x + " " + map[now.y+1,now.x].y);
@@ -147,7 +139,7 @@ namespace pathFinding
             }
         }
 
-        public Tile[,] clearMap(Tile[,] map)
+        public static Tile[,] clearMap(Tile[,] map)
         {
             for (int i = 0; i < map.GetLength(0); i++)
             {
@@ -167,16 +159,12 @@ namespace pathFinding
 
         public Tile[,] findShortestPath(Tile[,] map)
         {
-            if (back.Count == 0)
-            {
-                return map;
-            }
-            else
-            {
-                while (back.Count > 0)
+            Tile[] arr = back.ToArray();
+            for (int i = 0; i < arr.Length; i++) { 
+                foreach (Tile tile in arr)
                 {
-                    Tile tile = back.Dequeue();
-                    if (tile.value == 1 && tile.symbol == " ")
+                    map = clearMap(map);
+                    if (tile.symbol == " ")
                     {
                         neighbor.Clear();
                         getNeighbors(map, tile);
@@ -184,19 +172,14 @@ namespace pathFinding
                         {
                             tile.value = 0;
                             tile.symbol = "■";
-                            map = clearMap(map);
                         }
                     }
-                    else
-                    {
-                        return findShortestPath(clearMap(map));
-                    }
                 }
-                return map;
             }
+            return map;
         }
 
-        public Tile[,] displayShortestPath(Tile[,] map)
+        public static Tile[,] displayShortestPath(Tile[,] map)
         {
             foreach (Tile tile in map)
             {
@@ -216,7 +199,11 @@ namespace pathFinding
                 {
                     if (map[i, j].value == 2)
                     {
-                        map[i, j].symbol = "*";
+                        map[i, j].symbol = "S";
+                    }
+                    if (map[i, j].value == 3)
+                    {
+                        map[i, j].symbol = "F";
                     }
                     Console.Write(map[i, j].symbol + " ");
                 }
@@ -229,7 +216,24 @@ namespace pathFinding
             Program program = new Program();
             int startX = 0;
             int startY = 0;
-            Tile[,] map = new Tile[6, 7];
+
+            int[,] nrMap = new int[12,17]{
+                {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,0,0,0,1,0,0,0,0,0,0,1,0,0,0,0},
+                {0,0,1,1,1,1,0,0,0,0,0,0,1,0,0,0,0},
+                {0,0,0,0,0,1,0,1,1,0,0,0,1,0,0,0,0},
+                {0,0,0,0,1,1,1,1,3,0,0,0,1,0,0,0,0},
+                {1,1,1,0,1,0,0,1,1,1,1,1,1,1,0,0,0},
+                {0,0,1,0,1,0,0,0,0,0,0,0,0,1,0,0,0},
+                {0,0,1,1,1,0,0,0,0,0,0,0,0,0,0,0,0},
+                {0,0,1,0,2,0,0,1,1,1,1,1,0,1,0,0,0},
+                {0,0,1,0,1,0,0,1,0,0,0,1,0,1,0,0,0},
+                {0,0,0,0,1,1,1,1,0,0,0,1,1,1,0,0,0}
+            };
+
+
+            Tile[,] map = new Tile[nrMap.GetLength(0),nrMap.GetLength(1)];
             for (int i = 0; i < map.GetLength(0); i++)
             {
                 for (int j = 0; j < map.GetLength(1); j++)
@@ -239,9 +243,9 @@ namespace pathFinding
                     map[i, j].y = i;
                 }
             }
-            map = setMap(map, map.GetLength(0), map.GetLength(1));
+            map = setMap(map, nrMap);
             printMap(map);
-            Console.WriteLine("\n\n");
+            Console.WriteLine("\n Solved: \n");
 
             foreach (Tile tile in map)
             {
@@ -254,17 +258,17 @@ namespace pathFinding
 
             map = program.solve(map, map[startY, startX]);
             printMap(map);
-            Console.WriteLine("\n\n");
+            Console.WriteLine("\n Cleared: \n");
 
-            program.clearMap(map);
+            map = clearMap(map);
             printMap(map);
-            Console.WriteLine("\n\n");
+            Console.WriteLine("\n Shortest: \n");
 
             map = program.findShortestPath(map);
             printMap(map);
-            Console.WriteLine("\n\n");
+            Console.WriteLine("\n Final: \n");
 
-            map = program.displayShortestPath(map);
+            map = displayShortestPath(map);
             printMap(map);
             Console.WriteLine("\n\n");
 
