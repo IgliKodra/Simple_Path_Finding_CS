@@ -1,0 +1,16 @@
+C:\Users\User\source\repos\CS_Path_Finding_Algorithm\bin\Debug\net5.0\CS_Path_Finding_Algorithm.exe
+C:\Users\User\source\repos\CS_Path_Finding_Algorithm\bin\Debug\net5.0\CS_Path_Finding_Algorithm.deps.json
+C:\Users\User\source\repos\CS_Path_Finding_Algorithm\bin\Debug\net5.0\CS_Path_Finding_Algorithm.runtimeconfig.json
+C:\Users\User\source\repos\CS_Path_Finding_Algorithm\bin\Debug\net5.0\CS_Path_Finding_Algorithm.runtimeconfig.dev.json
+C:\Users\User\source\repos\CS_Path_Finding_Algorithm\bin\Debug\net5.0\CS_Path_Finding_Algorithm.dll
+C:\Users\User\source\repos\CS_Path_Finding_Algorithm\bin\Debug\net5.0\CS_Path_Finding_Algorithm.pdb
+C:\Users\User\source\repos\CS_Path_Finding_Algorithm\obj\Debug\net5.0\CS_Path_Finding_Algorithm.csproj.AssemblyReference.cache
+C:\Users\User\source\repos\CS_Path_Finding_Algorithm\obj\Debug\net5.0\CS_Path_Finding_Algorithm.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\User\source\repos\CS_Path_Finding_Algorithm\obj\Debug\net5.0\CS_Path_Finding_Algorithm.AssemblyInfoInputs.cache
+C:\Users\User\source\repos\CS_Path_Finding_Algorithm\obj\Debug\net5.0\CS_Path_Finding_Algorithm.AssemblyInfo.cs
+C:\Users\User\source\repos\CS_Path_Finding_Algorithm\obj\Debug\net5.0\CS_Path_Finding_Algorithm.csproj.CoreCompileInputs.cache
+C:\Users\User\source\repos\CS_Path_Finding_Algorithm\obj\Debug\net5.0\CS_Path_Finding_Algorithm.dll
+C:\Users\User\source\repos\CS_Path_Finding_Algorithm\obj\Debug\net5.0\refint\CS_Path_Finding_Algorithm.dll
+C:\Users\User\source\repos\CS_Path_Finding_Algorithm\obj\Debug\net5.0\CS_Path_Finding_Algorithm.pdb
+C:\Users\User\source\repos\CS_Path_Finding_Algorithm\obj\Debug\net5.0\CS_Path_Finding_Algorithm.genruntimeconfig.cache
+C:\Users\User\source\repos\CS_Path_Finding_Algorithm\obj\Debug\net5.0\ref\CS_Path_Finding_Algorithm.dll
